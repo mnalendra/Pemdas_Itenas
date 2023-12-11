@@ -7,24 +7,52 @@ data = {'Nama': ['John', 'Jane', 'Bob', 'Alice'],
 df = pd.DataFrame(data)
 
 # Pertanyaan 1:
-
 # Gunakan loop for dan fungsi lambda untuk menghitung gaji setiap karyawan setelah diberikan peningkatan sebesar 5% dari gaji saat ini.
 
-# Pertanyaan 2:
+bonus = 0.05
+for index, i in df.iterrows():
+        df.at[index, 'Bonus_Tetap(Use For)'] = i['Gaji'] + (i['Gaji'] * bonus)
 
+
+df['Bonus_Tetap(Use Lambda)'] = df.apply(lambda x : x['Gaji'] + (x['Gaji'] * bonus), axis=1)
+
+# Pertanyaan 2:
 # Setelah perubahan dilakukan, tampilkan DataFrame yang sudah diperbarui dan berikan ringkasan perubahan yang telah terjadi.
 
-# Pertanyaan 3:
+print('DataFrame yang sudah diperbarui:')
+print(df)
+print()
+ringkasan = df[['Bonus_Tetap(Use For)', 'Bonus_Tetap(Use Lambda)']]
+print('Ringkasan Penambahan Pada Tabel:')
+print(ringkasan)
+print()
 
+# Pertanyaan 3:
 # Gunakan loop for lagi untuk mengevaluasi karyawan yang usianya di atas 30 tahun. Jika usia karyawan di atas 30, berikan peningkatan tambahan sebesar 2% dari gaji saat ini menggunakan fungsi lambda.
 
-# Pertanyaan 4:
+tambahan = 0.02
 
+for index, i in df.iterrows():
+        if i['Usia'] > 30:
+                df.at[index, 'Karyawan_Mendapatkan_Bonus'] = i['Nama']
+        else:
+             df.at[index, 'Karyawan_Mendapatkan_Bonus'] = 'Tidak Ada'  
+
+df['Hasil_Tambahan_Gaji'] = df.apply(lambda x : x['Gaji'] + (x['Gaji'] * tambahan) if x['Usia'] > 30 else x['Gaji'], axis=1)
+
+# Pertanyaan 4:
 # Tampilkan DataFrame yang sudah diperbarui setelah peningkatan gaji tambahan dan berikan ringkasan hasilnya.
+
+print('DataFrame yang sudah diperbaharui:')
+print(df)
+print()
+ringkasan2 = df[['Karyawan_Mendapatkan_Bonus', 'Hasil_Tambahan_Gaji']]
+print('Ringkasan Pada Kolom yang sudah ditambahkan:')
+print(ringkasan2)
 
 # ---------------------------- #
 # Buat Branch Baru pada repository github berikut dengan format KELAS_NRP_NAMA
-# https://github.com/diashfirdaus-cyber/Pemdas_Itenas.git
+# https://gitlab.com/itenas/tugas_pemdas.git
 # ---------------------------- #
 
 # Catatan:
